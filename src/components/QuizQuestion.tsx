@@ -1,0 +1,70 @@
+import type { Language, QuizQuestion } from '@/types';
+import { getText } from '@/utils/texts';
+
+interface QuizQuestionProps {
+  question: QuizQuestion;
+  language: Language;
+  selectedAnswer: number | null;
+  showResult: boolean;
+  onAnswerSelect: (index: number) => void;
+}
+
+export const QuizQuestionComponent = ({
+  question,
+  language,
+  selectedAnswer,
+  showResult,
+  onAnswerSelect
+}: QuizQuestionProps) => {
+  const texts = getText(language);
+
+  return (
+    <div className="bg-white border-2 border-gray-400 p-6">
+      <h2 className={`text-2xl font-semibold text-center mb-6 ${language === 'ja' ? 'font-japanese' : ''}`}>
+        {language === 'ja' 
+          ? <><span className="font-mono bg-gray-200 px-2 py-1">{question.correctAnswer.ccTLD}</span> はどこの国?</>
+          : <>{texts.question} <span className="font-mono bg-gray-200 px-2 py-1">{question.correctAnswer.ccTLD}</span>?</>
+        }
+      </h2>
+      
+      <div className="space-y-3">
+        {question.options.map((option, index) => (
+          <button
+            key={index}
+            onClick={() => onAnswerSelect(index)}
+            disabled={showResult}
+            className={`w-full p-4 text-left border-2 transition-colors cursor-pointer ${
+              showResult
+                ? option.ccTLD === question.correctAnswer.ccTLD
+                  ? 'bg-green-100 border-green-500 text-green-800'
+                  : selectedAnswer === index
+                  ? 'bg-red-100 border-red-500 text-red-800'
+                  : 'bg-gray-100 border-gray-300 text-gray-600'
+                : selectedAnswer === index
+                ? 'bg-blue-100 border-blue-500'
+                : 'bg-gray-50 border-gray-300 hover:bg-gray-100'
+            }`}
+          >
+            <div className={`font-medium ${language === 'ja' ? 'font-japanese' : ''}`}>
+              {language === 'ja' ? option.countryJP : option.countryEN}
+            </div>
+          </button>
+        ))}
+      </div>
+      
+      {showResult && selectedAnswer !== null && (
+        <div className="mt-6 text-center">
+          <div className={`text-lg font-semibold mb-4 ${
+            question.options[selectedAnswer].ccTLD === question.correctAnswer.ccTLD
+              ? 'text-green-600'
+              : 'text-red-600'
+          } ${language === 'ja' ? 'font-japanese' : ''}`}>
+            {question.options[selectedAnswer].ccTLD === question.correctAnswer.ccTLD
+              ? texts.correct
+              : texts.incorrect}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
