@@ -1,4 +1,4 @@
-# CCQuiz
+# ccQuiz
 
 Country code quiz application.
 
