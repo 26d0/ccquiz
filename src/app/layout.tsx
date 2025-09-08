@@ -33,11 +33,20 @@ export const metadata: Metadata = {
     title: "ccQuiz",
     description: "Country code quiz game",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "ccQuiz - Country Code Quiz",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "ccQuiz",
     description: "Country code quiz game",
+    images: ["/og-image.png"],
   },
 };
 
