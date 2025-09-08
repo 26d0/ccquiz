@@ -1,7 +1,7 @@
-import type { CountryData, QuizQuestion } from '@/types';
+import type { CountryData, QuizQuestion, QuizMode } from '@/types';
 import { QUIZ_OPTIONS_COUNT } from '@/constants';
 
-export const generateQuizQuestion = (countries: CountryData[]): QuizQuestion | null => {
+export const generateQuizQuestion = (countries: CountryData[], _mode: QuizMode = 'normal'): QuizQuestion | null => {
   if (countries.length < QUIZ_OPTIONS_COUNT) return null;
 
   const correctAnswer = countries[Math.floor(Math.random() * countries.length)];
@@ -21,6 +21,8 @@ export const generateQuizQuestion = (countries: CountryData[]): QuizQuestion | n
     [options[i], options[j]] = [options[j], options[i]];
   }
 
+  // The quiz structure is the same for both normal and reverse modes
+  // The mode affects only the display in the UI components
   return { correctAnswer, options };
 };
 

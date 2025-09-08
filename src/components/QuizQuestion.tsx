@@ -1,9 +1,10 @@
-import type { Language, QuizQuestion } from '@/types';
+import type { Language, QuizQuestion, QuizMode } from '@/types';
 import { getText } from '@/utils/texts';
 
 interface QuizQuestionProps {
   question: QuizQuestion;
   language: Language;
+  mode: QuizMode;
   selectedAnswer: number | null;
   showResult: boolean;
   onAnswerSelect: (index: number) => void;
@@ -12,6 +13,7 @@ interface QuizQuestionProps {
 export const QuizQuestionComponent = ({
   question,
   language,
+  mode,
   selectedAnswer,
   showResult,
   onAnswerSelect
@@ -21,10 +23,15 @@ export const QuizQuestionComponent = ({
   return (
     <div className="bg-white border-2 border-gray-400 p-6">
       <h2 className={`text-2xl font-semibold text-center mb-6 ${language === 'ja' ? 'font-japanese' : ''}`}>
-        {language === 'ja' 
-          ? <><span className="font-mono bg-gray-200 px-2 py-1">{question.correctAnswer.ccTLD}</span> はどこの国?</>
-          : <>{texts.question} <span className="font-mono bg-gray-200 px-2 py-1">{question.correctAnswer.ccTLD}</span>?</>
-        }
+        {mode === 'normal' ? (
+          language === 'ja' 
+            ? <><span className="font-mono bg-gray-200 px-2 py-1">{question.correctAnswer.ccTLD}</span> はどこの国?</>
+            : <>{texts.question} <span className="font-mono bg-gray-200 px-2 py-1">{question.correctAnswer.ccTLD}</span>?</>
+        ) : (
+          language === 'ja' 
+            ? <><span className="bg-gray-200 px-2 py-1">{question.correctAnswer.countryJP}</span> のTLDは?</>
+            : <>What is the TLD for <span className="bg-gray-200 px-2 py-1">{question.correctAnswer.countryEN}</span>?</>
+        )}
       </h2>
       
       <div className="space-y-3">
@@ -46,7 +53,10 @@ export const QuizQuestionComponent = ({
             }`}
           >
             <div className={`font-medium ${language === 'ja' ? 'font-japanese' : ''}`}>
-              {language === 'ja' ? option.countryJP : option.countryEN}
+              {mode === 'normal' 
+                ? (language === 'ja' ? option.countryJP : option.countryEN)
+                : option.ccTLD
+              }
             </div>
           </button>
         ))}

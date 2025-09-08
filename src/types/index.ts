@@ -11,6 +11,8 @@ export interface QuizQuestion {
 
 export type Language = 'en' | 'ja';
 
+export type QuizMode = 'normal' | 'reverse';
+
 export interface Score {
   correct: number;
   total: number;
