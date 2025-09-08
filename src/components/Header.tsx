@@ -39,11 +39,11 @@ export const Header = ({ language, score, mode, hasToggledMode, onLanguageChange
           </button>
         </div>
       </div>
-      <div className={`mt-4 text-sm text-gray-500 ${language === 'ja' ? 'font-japanese' : ''}`}>
+      {/* <div className={`mt-4 text-sm text-gray-500 ${language === 'ja' ? 'font-japanese' : ''}`}>
 
         {texts.score}: {score.correct} / {score.total} 
         {score.total > 0 && ` (${Math.round((score.correct / score.total) * 100)}%)`}
-      </div>
+      </div> */}
     </header>
   );
 };
