@@ -18,7 +18,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen p-4 sm:p-8 bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen p-4 sm:p-8 bg-background">
       <Header 
         language={language}
         score={score}

@@ -10,8 +10,8 @@ export const LoadingState = ({ language, isError = false }: LoadingStateProps) =
   const texts = getText(language);
   
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-      <div className={`text-xl text-gray-600 dark:text-gray-400 ${language === 'ja' ? 'font-japanese' : ''}`}>
+    <div className="min-h-screen flex items-center justify-center bg-background">
+      <div className={`text-xl text-muted ${language === 'ja' ? 'font-japanese' : ''}`}>
         {isError ? texts.failed : texts.loading}
       </div>
     </div>
