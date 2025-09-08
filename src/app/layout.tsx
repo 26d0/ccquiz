@@ -28,7 +28,7 @@ const mplusRounded = M_PLUS_Rounded_1c({
 
 export const metadata: Metadata = {
   title: "ccQuiz",
-  description: "A fun quiz game to test your knowledge of country code top-level domains (ccTLDs)",
+  description: "i cant write description",
 };
 
 export default function RootLayout({
