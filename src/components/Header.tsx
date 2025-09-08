@@ -21,7 +21,7 @@ export const Header = ({ language, score, mode, hasToggledMode, onLanguageChange
             href="https://github.com/26d0/ccquiz"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-gray-600 hover:text-gray-900 underline flex items-center gap-1"
+            className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 underline flex items-center gap-1"
           >
             <svg
               width="16"
@@ -34,13 +34,13 @@ export const Header = ({ language, score, mode, hasToggledMode, onLanguageChange
             </svg>
           </a>
         </div>
-        <h1 className="text-4xl font-bold text-gray-900 font-mono">
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 font-mono">
           ccQuiz
         </h1>
         <div className="mt-2">
           <button
             onClick={onModeToggle}
-            className={`text-sm text-gray-600 hover:text-gray-900 underline ${language === 'ja' ? 'font-japanese' : ''}`}
+            className={`text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 underline ${language === 'ja' ? 'font-japanese' : ''}`}
           >
             {mode === 'normal' 
               ? (language === 'ja' ? `${!hasToggledMode ? ' ✨️' : ''}逆モードにする` : `${!hasToggledMode ? ' ✨️' : ''} Reverse Mode`)
@@ -51,17 +51,16 @@ export const Header = ({ language, score, mode, hasToggledMode, onLanguageChange
         <div className="absolute top-0 right-0">
           <button
             onClick={onLanguageChange}
-            className={`text-sm text-gray-600 hover:text-gray-900 underline ${language === 'ja' ? 'font-japanese' : ''}`}
+            className={`text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 underline ${language === 'ja' ? 'font-japanese' : ''}`}
           >
             {texts.switchLanguage}
           </button>
         </div>
       </div>
-      {/* <div className={`mt-4 text-sm text-gray-500 ${language === 'ja' ? 'font-japanese' : ''}`}>
-
+      <div className={`mt-4 text-sm text-gray-500 dark:text-gray-400 ${language === 'ja' ? 'font-japanese' : ''}`}>
         {texts.score}: {score.correct} / {score.total} 
         {score.total > 0 && ` (${Math.round((score.correct / score.total) * 100)}%)`}
-      </div> */}
+      </div>
     </header>
   );
 };
