@@ -20,18 +20,42 @@ export const QuizQuestionComponent = ({
 }: QuizQuestionProps) => {
   const texts = getText(language);
 
+  const getQuestionText = () => {
+    if (mode === 'normal') {
+      return language === 'ja' 
+        ? (
+          <>
+            <span className="font-mono bg-gray-200 px-2 py-1">{question.correctAnswer.ccTLD}</span> 
+            {texts.questionSuffix}
+          </>
+        )
+        : (
+          <>
+            {texts.question} <span className="font-mono bg-gray-200 px-2 py-1">{question.correctAnswer.ccTLD}</span>
+            {texts.questionSuffix}
+          </>
+        );
+    } else {
+      return language === 'ja' 
+        ? (
+          <>
+            <span className="bg-gray-200 px-2 py-1">{question.correctAnswer.countryJP}</span>
+            {texts.reverseQuestionSuffix}
+          </>
+        )
+        : (
+          <>
+            {texts.reverseQuestionPrefix} <span className="bg-gray-200 px-2 py-1">{question.correctAnswer.countryEN}</span>
+            {texts.reverseQuestionSuffix}
+          </>
+        );
+    }
+  };
+
   return (
     <div className="bg-white border-2 border-gray-400 p-6">
       <h2 className={`text-2xl font-semibold text-center mb-6 ${language === 'ja' ? 'font-japanese' : ''}`}>
-        {mode === 'normal' ? (
-          language === 'ja' 
-            ? <><span className="font-mono bg-gray-200 px-2 py-1">{question.correctAnswer.ccTLD}</span> はどこの国?</>
-            : <>{texts.question} <span className="font-mono bg-gray-200 px-2 py-1">{question.correctAnswer.ccTLD}</span>?</>
-        ) : (
-          language === 'ja' 
-            ? <><span className="bg-gray-200 px-2 py-1">{question.correctAnswer.countryJP}</span> のTLDは?</>
-            : <>What is the TLD for <span className="bg-gray-200 px-2 py-1">{question.correctAnswer.countryEN}</span>?</>
-        )}
+        {getQuestionText()}
       </h2>
       
       <div className="space-y-3">
