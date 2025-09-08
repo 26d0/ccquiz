@@ -156,7 +156,7 @@ export default function Home() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-xl text-gray-600">{texts[language].loading}</div>
+        <div className={`text-xl text-gray-600 ${language === 'ja' ? 'font-japanese' : ''}`}>{texts[language].loading}</div>
       </div>
     );
   }
@@ -164,7 +164,7 @@ export default function Home() {
   if (!currentQuestion) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-xl text-gray-600">{texts[language].failed}</div>
+        <div className={`text-xl text-gray-600 ${language === 'ja' ? 'font-japanese' : ''}`}>{texts[language].failed}</div>
       </div>
     );
   }
@@ -173,28 +173,28 @@ export default function Home() {
     <div className="min-h-screen p-4 sm:p-8 bg-gray-50">
       <header className="mb-8 text-center">
         <div className="relative mb-4">
-          <h1 className="text-4xl font-bold text-gray-900">
+          <h1 className="text-4xl font-bold text-gray-900 font-mono">
             ccQuiz
           </h1>
           <button
             onClick={() => changeLanguage(language === 'en' ? 'ja' : 'en')}
-            className="absolute top-0 right-0 text-sm text-gray-600 hover:text-gray-900 underline"
+            className={`absolute top-0 right-0 text-sm text-gray-600 hover:text-gray-900 underline ${language === 'ja' ? 'font-japanese' : ''}`}
           >
             {language === 'en' ? '日本語' : 'English'}
           </button>
         </div>
-        <div className="mt-4 text-sm text-gray-500">
+        <div className={`mt-4 text-sm text-gray-500 ${language === 'ja' ? 'font-japanese' : ''}`}>
           {texts[language].score}: {score.correct} / {score.total} 
           {score.total > 0 && ` (${Math.round((score.correct / score.total) * 100)}%)`}
         </div>
       </header>
       
       <main className="max-w-2xl mx-auto">
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-          <h2 className="text-2xl font-semibold text-center mb-6">
+        <div className="bg-white border-2 border-gray-400 p-6 mb-6">
+          <h2 className={`text-2xl font-semibold text-center mb-6 ${language === 'ja' ? 'font-japanese' : ''}`}>
             {language === 'ja' 
-              ? <><span className="font-mono bg-gray-200 px-2 py-1 rounded">{currentQuestion.correctAnswer.ccTLD}</span> はどこの国?</>
-              : <>{texts[language].question} <span className="font-mono bg-gray-200 px-2 py-1 rounded">{currentQuestion.correctAnswer.ccTLD}</span>?</>
+              ? <><span className="font-mono bg-gray-200 px-2 py-1">{currentQuestion.correctAnswer.ccTLD}</span> はどこの国?</>
+              : <>{texts[language].question} <span className="font-mono bg-gray-200 px-2 py-1">{currentQuestion.correctAnswer.ccTLD}</span>?</>
             }
           </h2>
           
@@ -204,7 +204,7 @@ export default function Home() {
                 key={index}
                 onClick={() => handleAnswerSelect(index)}
                 disabled={showResult}
-                className={`w-full p-4 text-left rounded-lg border-2 transition-colors ${
+                className={`w-full p-4 text-left border-2 transition-colors cursor-pointer ${
                   showResult
                     ? option.ccTLD === currentQuestion.correctAnswer.ccTLD
                       ? 'bg-green-100 border-green-500 text-green-800'
@@ -216,7 +216,7 @@ export default function Home() {
                     : 'bg-gray-50 border-gray-300 hover:bg-gray-100'
                 }`}
               >
-                <div className="font-medium">
+                <div className={`font-medium ${language === 'ja' ? 'font-japanese' : ''}`}>
                   {language === 'ja' ? option.countryJP : option.countryEN}
                 </div>
               </button>
@@ -229,7 +229,7 @@ export default function Home() {
                 currentQuestion.options[selectedAnswer!].ccTLD === currentQuestion.correctAnswer.ccTLD
                   ? 'text-green-600'
                   : 'text-red-600'
-              }`}>
+              } ${language === 'ja' ? 'font-japanese' : ''}`}>
                 {currentQuestion.options[selectedAnswer!].ccTLD === currentQuestion.correctAnswer.ccTLD
                   ? texts[language].correct
                   : texts[language].incorrect}
