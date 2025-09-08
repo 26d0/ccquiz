@@ -1,5 +1,7 @@
 # ccQuiz
 
+<img src=https://raw.githubusercontent.com/26d0/ccquiz/refs/heads/main/public/thumbnail.png></img>
+
 Country code quiz application.
 
 ## Setup
